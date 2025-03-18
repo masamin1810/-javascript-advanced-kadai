@@ -4,7 +4,7 @@
     text-align: center;
     }
    
-    /* ゲームの残り秒数が表示されるタイマーの領域 */
+    /* ゲームの残秒数が表示されるタイマー領域 */
     .count {
     margin: 0;
     font-weight: bold;
@@ -30,7 +30,7 @@
     background-color: red;
     }
 
-    /*　現在タイプ数　*/
+    /* 現在タイプ数の文字スタイル */
     .number {
     color:  #888; 
     font-weight: bold;  

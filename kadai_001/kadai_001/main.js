@@ -1,22 +1,22 @@
 // 変数ここで初期化
 let typed = '';//タイプの変数
-let untyped = '';//
+let untyped = '';//テキストの変数
 let score = 0;//得点の変数
-let typeCount = 0; // タイプ数カウント
+let typeCount = 0;  // 最初に0に初期化
 
 // HTML要素取得コマンド
 const typedfield = document.getElementById('typed');//タイプする機能
 const start = document.getElementById('start');//スタート機能
 const count = document.getElementById('count');//カウント機能
-const typeCounter = document.getElementById('typeCounter');  // タイプ数表示
-const untypedfield = document.getElementById('untyped');//
+const numberElement = document.getElementById('number');  // タイプ数表示
+const untypedfield = document.getElementById('untyped');//テキスト内容表示
 const wrap = document.getElementById('wrap');//
 
 // ココが問題として提示される
 const textLists = [
-  'Hello World','This is my App','How are you?',
-  'Today is sunny','I love JavaScript!','Good morning',
-  'I am Japanese','Let it be','Samurai',
+  'Hello World','This is my Apple','How are you?',
+  'Today is sunny','I love JavaScript!','Good morning♪',
+  'I am Japanese','Let it be','Samurai','Geisya',
   'Typing Game','Information Technology',
   'I want to be a programmer','What day is today?',
   'I want to build a web app','Nice to meet you',
@@ -26,23 +26,26 @@ const textLists = [
   'Thank you very much','Google Apple Facebook Amazon',
   'ECMAScript','console.log','for while if switch',
   'var let const','Windows Mac Linux iOS Android',
-  'programming'
+  'programming','JavaScript','Java','HTML/CSS','WordPless',
+  'Manekkosan',
 ];
 
 // ランダムに表示させる
 const createText = () => {
   typed = '';
   typedfield.textContent = typed;
-
   let random = Math.floor(Math.random() * textLists.length);
+  // 配列からランダムにテキストを取得し画面に表示する
   untyped = textLists[random];
-  untypedfield.textContent = untyped;
+  untypedfield.textContent = untyped;// ここで間違いなく設定
 };
 
 // キー入力判定
 const keyPress = e => {
-  if (e.key !== untyped.substring(0, 1)) {
-    wrap.classList.add('mistyped');
+  if (e.key === untyped.substring(0, 1)) {
+    typeCount++;
+    numberElement.textContent = typeCount;  // DOMを更新
+      wrap.classList.add('mistyped');
     setTimeout(() => {
       wrap.classList.remove('mistyped');
     }, 100);
@@ -78,6 +81,9 @@ const rankCheck = score => {
   return `${score}文字打てました!\n${text}\n【OK】リトライ / 【キャンセル】終了`;
 };
 
+//タイプ成功数をカウント
+numberElement.textContent = typeCount;
+
 // ゲーム終了
 const gameOver = id => {
   clearInterval(id);
@@ -103,7 +109,7 @@ const timer = () => {
 };
 
 // ゲームスタート
-start.addEventListener('click', () => {　//クリックでスタート
+start.addEventListener('click', () => {//クリックスタート
   timer();
   createText();
   start.style.display = 'none';
@@ -111,3 +117,6 @@ start.addEventListener('click', () => {　//クリックでスタート
 });
 
 untypedfield.textContent = 'スタートボタンで開始';
+
+console.log(`typeCount: ${typeCount}`);
+console.log(`current untyped: ${untyped}`);
