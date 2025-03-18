@@ -89,15 +89,11 @@ numberElement.textContent = typeCount;
 // ゲーム終了
 const gameOver = id => {
   clearInterval(id);
-  
   // タイムアップの表示
-  const messageElement = document.getElementById('message');
-  messageElement.textContent = 'タイムアップ！';
-
+  untypedfield.textContent = 'タイムアップ！';
   // 10ミリ秒後にゲーム結果を表示
   setTimeout(() => {
       const result = confirm(rankCheck(score));
-      
       if (result) {
           window.location.reload();
       }
